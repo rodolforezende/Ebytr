@@ -7,5 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rodolfo Rezende",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "eslint-config-trybe-backend": "^1.0.4",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "mongodb": "^4.1.3",
+    "mongoose": "^6.0.12"
+  }
 }
