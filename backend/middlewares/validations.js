@@ -2,6 +2,7 @@ const Joi = require('joi');
 const validator = require('email-validator');
 
 const registerValidate = async (body) => {
+
   const schema = Joi.object({
     name: Joi.string().required().min(3).max(50),
     email: Joi.string().required().min(3).max(50),
@@ -29,8 +30,9 @@ const loginValidate = async (body) => {
   if (error && error.details.find(erro => erro)) {
     return { message: 'Invalid entries. Try again.' };
   }
-  return true;
-}
 
+  return true;
+
+};
 
 module.exports = { registerValidate, loginValidate };
