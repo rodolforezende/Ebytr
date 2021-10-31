@@ -7,7 +7,7 @@ const userRegister = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const result = await userService.userRegisters(name, email, password)
-    if(result.message) {
+    if (result.message) {
       return res.status(400).json(result)
     }
     res.status(201).json(result);
@@ -19,9 +19,13 @@ const userRegister = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const result = await userService.loginControl(email, password)
+    if (result.message) {
+      return res.status(400).json(result);
+    }
   } catch (error) {
     return res.status(400).json({ message: 'Something is wrong' });
   }
 }
 
-module.exports = { userRegister }
+module.exports = { userRegister, login }
