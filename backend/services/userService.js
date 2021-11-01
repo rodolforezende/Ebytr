@@ -24,8 +24,10 @@ const userRegisters = async (body) => {
   }
 }
 
+
 const loginVerification = async (body) => {
   const validate = await loginValidate(body.email, body.password);
+
   if (validate.message) {
     return validate;
   }
@@ -40,3 +42,4 @@ const loginVerification = async (body) => {
   return token;
 }
 module.exports = { userRegisters, loginVerification };
+
