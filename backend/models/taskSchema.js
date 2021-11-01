@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
-  taksTitle: {
+
+  taskTitle: {
     type:String,
     required: true,
     minlength: 3,
@@ -16,8 +17,6 @@ const taskSchema = mongoose.Schema({
   userTask: {
     type:String,
     required: true,
-    minlength: 3,
-    maxlength: 50,
   },
   admin: {
     type: Boolean,
@@ -33,5 +32,4 @@ const taskSchema = mongoose.Schema({
 }
 );
 
-
-module.exports = mongoose.model('Task', taksSchema, 'task');
+module.exports = mongoose.model('Task', taskSchema, 'task');
