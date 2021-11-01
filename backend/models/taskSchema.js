@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
+
   taskTitle: {
     type:String,
     required: true,
@@ -30,6 +31,5 @@ const taskSchema = mongoose.Schema({
   versionKey: false,
 }
 );
-
 
 module.exports = mongoose.model('Task', taskSchema, 'task');
