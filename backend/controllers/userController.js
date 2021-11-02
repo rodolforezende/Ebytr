@@ -18,12 +18,11 @@ const userRegister = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-
     const result = await userService.loginVerification(req.body);
     if (result.message) {
       return res.status(400).json(result)
     }
-    res.status(200).json({ "User Logged": result})
+    res.status(200).json({ token: result })
 
   } catch (error) {
     return res.status(400).json({ message: 'Something is wrong' });
