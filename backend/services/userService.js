@@ -35,7 +35,7 @@ const loginVerification = async (body) => {
   const findExistUser = await User.findOne({ email: body.email });
   if (!findExistUser) return { message: 'Email or Password incorrect' };
 
-  const passwordAndUserMatch = bcrypt.compareSync(body.password, findExistUser.password);
+  const passwordAndUserMatch = bcrypt.compare(body.password, findExistUser.password);
   if (!passwordAndUserMatch) return { message: 'Email or Password incorrect' };
 
   const token = jwt.sign({ _id: findExistUser._id, email: findExistUser,  admin: findExistUser.admin }, process.env.TOKEN_SECRET);
