@@ -1,6 +1,8 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom';
-import axios from 'axios'
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
+import { pt } from 'date-fns/locale';
+import { format } from 'date-fns';
 
 const Tasks = () => {
   const [ isLocal, setLocal ] = React.useState(false);
@@ -38,7 +40,6 @@ const Tasks = () => {
       const taskCreated = await axios.post('http://localhost:5000/task', task, { headers: { Authorization: localStorage.getItem('token') } });
       setTask({ taskTitle: '',  taskDescription: '' })
       setError(false);
-      setTask({ taskTitle: '',  taskDescription: '' })
       return taskCreated.data
     } catch (error) {
       console.log(error.response.data.message)
@@ -46,7 +47,6 @@ const Tasks = () => {
     }
   }
 
-  
 
   return (    
     <div>
@@ -61,13 +61,30 @@ const Tasks = () => {
         </form>
         <div>
           <h2>All tasks</h2>
-          { allTask && allTask.map(({taskTitle, taskDescription}, index) => (
+          { allTask && allTask.map(({_id: id, taskTitle, taskDescription, createdAt}, index) => (
             <div key={index}>           
               
               <p>{taskTitle}</p> 
               <p>{taskDescription}</p> 
-              <button>Update</button>
-              <button>Delete</button>
+              <p>{format(
+                  Date.parse(createdAt),
+                  "'Dia' dd 'de' MMMM', às ' HH:mm'h'",
+                  { locale: pt },
+                )}</p>
+              <Link to={ {
+                pathname: '/task/update',
+                state: { id, taskTitle, taskDescription, createdAt },
+              } }
+              >
+                <button>Update</button>
+              </Link>
+              <Link to={ {
+                pathname: '/task/delete',
+                state: { id, taskTitle, taskDescription, createdAt },
+              } }
+              > 
+                <button>Delete</button>
+              </Link>
             </div>  
           )) }
         </div>

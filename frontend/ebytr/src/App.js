@@ -3,6 +3,9 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Tasks from './components/Tasks';
+import Update from './components/Update'
+import Delete from './components/Delete';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -12,9 +15,14 @@ function App() {
         <Route exact path="/">
           <Login />
         </Route>
-        <Route path="/task">
+        <Route exact path="/task">
           <Tasks />
         </Route>
+        <Route exact path="/regiter">
+          <Register />
+        </Route>
+        <Route path="/task/update" render={ (props) => <Update {...props } /> } />
+        <Route path="/task/delete" render={ (props) => <Delete {...props } /> } />
       </Switch>
     </div>
   );

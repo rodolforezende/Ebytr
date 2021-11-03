@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios'
 
 
@@ -8,6 +8,12 @@ const Login = () => {
   const [ login, setlogin ] = React.useState({ email: '', password: ''});
   const [ error, setError ] = React.useState(false)
   const [ isToken, setToken ] = React.useState(false)
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setToken(true)
+    }
+  }, [])
 
   function handleChange({ target }) {
     const { name, value } = target;
@@ -37,6 +43,9 @@ const Login = () => {
           <input type="password" placeholder="Digite sua senha" onChange={ handleChange }name="password" value={ login.password }  /> 
           <button type='submit' onClick={ handleSubmit } >Login</button>
         </form>
+      </div>
+      <div>
+        <Link to="/register"><button>Create New User</button></Link>
       </div>
       {isToken && <Redirect to="/task" />}
     </div>
