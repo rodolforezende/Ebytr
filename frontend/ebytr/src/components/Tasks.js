@@ -8,7 +8,8 @@ import Header from './Header';
 const Tasks = () => {
   const [ isLocal, setLocal ] = React.useState(false);
   const [ error, setError ] = React.useState(false)
-  const [ task, setTask ] = React.useState({ taskTitle: '',  taskDescription: '' })
+  const [ task, setTask ] = React.useState({ taskTitle: '',  taskDescription: '' });
+  const [ status, setStatus ] = React.useState({ status: 'Em andamento' });
   const [ allTask, setAllTasks ] = React.useState([]);
   const [ sortByTitle, setSortByTitle ] = React.useState(false)
 
@@ -39,8 +40,9 @@ const Tasks = () => {
   async function handleSubmit (event) {
     event.preventDefault();
     try {
-      const taskCreated = await axios.post('http://localhost:5000/task', task, { headers: { Authorization: localStorage.getItem('token') } });
+      const taskCreated = await axios.post('http://localhost:5000/task', { task, status }, { headers: { Authorization: localStorage.getItem('token') } });
       setTask({ taskTitle: '',  taskDescription: '' })
+      setStatus({ status: 'Pendente'})
       setError(false);
       return taskCreated.data
     } catch (error) {
@@ -79,6 +81,17 @@ const Tasks = () => {
           <form>
             <input type="text" placeholder="Digite o título" onChange={ handleChange } name='taskTitle' value={ task.taskTitle } />
             <input type="text" placeholder="Digite a descrição" onChange={ handleChange } name='taskDescription' value={ task.taskDescription } />
+            <div>
+              <label htmlFor="current">
+                <input id="current" type="radio" name="status" value="Em andamento" onChange={ ({ target }) => setStatus(target.value) } />EM ANDAMENTO
+              </label>
+              <label htmlFor="pendent">
+                <input id="pendent"type="radio" name="status" value="Pendente" onChange={ ({ target }) => setStatus(target.value) } />PENDENTE
+              </label>
+              <label htmlFor="done">
+                <input id="done" type="radio" name="status" value="Concluído" onChange={ ({ target }) => setStatus(target.value) }/>CONCLUIDO
+              </label>
+            </div>
             <button className="taskButton" type='submit' onClick={ handleSubmit }>Create</button>
           </form>
           <div>
@@ -100,7 +113,7 @@ const Tasks = () => {
             } }
             >descriptionOrder</button>
           </div>
-            { allTask && allTask.map(({_id: id, taskTitle, taskDescription, createdAt}, index) => (
+            { allTask && allTask.map(({_id: id, taskTitle, taskDescription, createdAt, status}, index) => (
               <div className="container"key={index}>           
                 
                 <p>{taskTitle}</p> 
@@ -110,16 +123,17 @@ const Tasks = () => {
                     "'Dia' dd 'de' MMMM', às ' HH:mm'h'",
                     { locale: pt },
                   )}</p>
+                <p>{ status }</p>
                 <Link to={ {
                   pathname: '/task/update',
-                  state: { id, taskTitle, taskDescription, createdAt },
+                  state: { id, taskTitle, taskDescription, createdAt, status },
                 } }
                 >
                   <button className="updateButton">Update</button>
                 </Link>
                 <Link to={ {
                   pathname: '/task/delete',
-                  state: { id, taskTitle, taskDescription, createdAt },
+                  state: { id, taskTitle, taskDescription, createdAt, status },
                 } }
                 > 
                   <button className="deleteButton">Delete</button>

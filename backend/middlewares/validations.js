@@ -40,6 +40,7 @@ const taskValidate = async (body) => {
   const schema = Joi.object({
     taskTitle: Joi.string().required().min(3).max(50),
     taskDescription: Joi.string().required().min(5).max(500),
+    status: Joi.string().require(),
   });
 
   const { error } = schema.validate(body);

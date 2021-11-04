@@ -10,6 +10,7 @@ const registerValidate = async (body, userId) => {
   const newTask = new Task({
     taskTitle: body.taskTitle,
     taskDescription: body.taskDescription,
+    status: body.status,
     userTask: userId,
   });
 
@@ -32,10 +33,10 @@ const printAllTasksByLoginById = async (id, userId) => {
   return result;
 }
 
-const updateTaskById = async ( id, userId, { taskTitle, taskDescription }) => {
+const updateTaskById = async ( id, userId, { taskTitle, taskDescription, status }) => {
   const result = await Task.updateOne({ _id: ObjectId(id), userTask: userId }, 
   {
-    $set: { taskTitle, taskDescription },
+    $set: { taskTitle, taskDescription, status },
   })
   if (!result) {
     return { message: 'Task not found' }
