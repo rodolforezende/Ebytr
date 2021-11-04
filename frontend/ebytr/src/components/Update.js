@@ -3,6 +3,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { pt } from 'date-fns/locale';
 import { format } from 'date-fns';
+import Header from './Header'
 
 const Update = ({ location }) => {
   const [ task, setTask ] = React.useState({ taskTitle: '',  taskDescription: '' });
@@ -32,25 +33,28 @@ const Update = ({ location }) => {
 
   return (
     <div>
-      <h2>Update Task</h2>
+      <Header />
       <div>
-        { error && <p>{ error }</p>}
-        <form>
-            <input type="text" placeholder="Digite o título" onChange={ handleChange } name='taskTitle' value={ task.taskTitle } />
-            <input type="text" placeholder="Digite a descrição" onChange={ handleChange } name='taskDescription' value={ task.taskDescription } />
-            <button type='submit' onClick={handleSubmit}>Update</button>
-        </form>
+        <h2>Update Task</h2>
+        <div>
+          { error && <p className="error">{ error }</p>}
+          <form>
+              <input type="text" placeholder="Digite o título" onChange={ handleChange } name='taskTitle' value={ task.taskTitle } />
+              <input type="text" placeholder="Digite a descrição" onChange={ handleChange } name='taskDescription' value={ task.taskDescription } />
+              <button className="updateButton" type='submit' onClick={handleSubmit}>Update</button>
+          </form>
+        </div>
+        <div className="container">
+          <p>{location.state.taskTitle}</p> 
+          <p>{location.state.taskDescription}</p> 
+          <p>{format(
+              Date.parse(location.state.createdAt),
+              "'Dia' dd 'de' MMMM', às ' HH:mm'h'",
+              { locale: pt },
+            )}</p>
+        </div>
+        {redirect && <Redirect to="/task" /> }
       </div>
-      <div>
-        <p>{location.state.taskTitle}</p> 
-        <p>{location.state.taskDescription}</p> 
-        <p>{format(
-            Date.parse(location.state.createdAt),
-            "'Dia' dd 'de' MMMM', às ' HH:mm'h'",
-            { locale: pt },
-          )}</p>
-      </div>
-      {redirect && <Redirect to="/task" /> }
     </div>
   )
 }

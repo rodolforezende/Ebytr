@@ -1,8 +1,6 @@
 
 const userService = require('../services/userService');
 
-const SECRET_TOKEN = process.env.TOKEN_SECRET;
-
 const userRegister = async (req, res) => {
   try {
     const result = await userService.userRegisters(req.body)
@@ -22,6 +20,7 @@ const login = async (req, res) => {
     if (result.message) {
       return res.status(400).json(result)
     }
+    console.log(req.body)
     res.status(200).json({ token: result })
 
   } catch (error) {

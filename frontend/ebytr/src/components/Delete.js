@@ -26,8 +26,8 @@ const Delete = ({ location }) => {
   return (
     <div>
       <h2>Delete Task</h2>
-      <div>
-      { error && <p>{ error }</p>}
+      { error && <p className="error">{ error }</p>}
+      <div className="container">
       <p>{location.state.taskTitle}</p> 
         <p>{location.state.taskDescription}</p> 
         <p>{format(
@@ -38,8 +38,8 @@ const Delete = ({ location }) => {
       </div>
       <div>
         <h4>You sure to delete this task?</h4>
-        <Link to="/task"><button onClick={ handleSubmit }>Im Sure, delete please</button></Link>
-        <Link to="/task"><button>Im not sure, please go back</button></Link>
+        <Link to="/task"><button className="deleteButton" onClick={ handleSubmit }>Im Sure, delete please</button></Link>
+        <Link to="/task"><button >Im not sure, please go back</button></Link>
       </div>
       {redirect && <Redirect to="/task" /> }
     </div>
