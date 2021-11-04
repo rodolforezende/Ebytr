@@ -52,19 +52,16 @@ const Tasks = () => {
 
   function alphabeticalOrder () {
     const test = allTask.sort((a,b) => (a.taskTitle > b.taskTitle) ? 1 : ((b.taskTitle > a.taskTitle) ? -1 : 0));
-    console.log(test)
     setAllTasks(test)
   }
 
   function descriptionOrder () {
     const test = allTask.sort((a,b) => (a.taskDescription > b.taskDescription) ? 1 : ((b.taskDescription > a.taskDescription) ? -1 : 0));
-    console.log(test)
     setAllTasks(test)
   }
 
   function createAtOrder () {
     const test = allTask.sort((a,b) => (a.createdAt > b.createdAt) ? 1 : ((b.createdAt > a.createdAt) ? -1 : 0));
-    console.log(test)
     setAllTasks(test)
   }
 

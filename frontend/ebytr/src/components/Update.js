@@ -27,7 +27,6 @@ const Update = ({ location }) => {
       await axios.put(`http://localhost:5000/task/${location.state.id}`, { task, status }, { headers: { Authorization: localStorage.getItem('token') }} );
       setRedirect(true)
     } catch (error) {
-      console.log(error.response)
       setError(error.response.data.message)
     }
   }

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const userRouter = require('../routes/userRouter');
-const taskRouter = require('../routes/taksRouter');
+const userRouter = require('./routes/userRouter');
+const taskRouter = require('./routes/taksRouter');
 
 const app = express();
 app.use(cors());

@@ -5,9 +5,6 @@ import { pt } from 'date-fns/locale';
 import { format } from 'date-fns';
 
 const Delete = ({ location }) => {
-
-  console.log(location.state.createdAt)
-
   const [ error, setError ] = React.useState(false);
   const [ redirect, setRedirect ] = React.useState(false)
 
@@ -17,8 +14,6 @@ const Delete = ({ location }) => {
       await axios.delete(`http://localhost:5000/task/${location.state.id}`, { headers: { Authorization: localStorage.getItem('token') } });
       setRedirect(true)
     } catch (error) {
-      console.log(error.response.data.message)
-      console.log(error.response.data.message)
       setError(error.response.data.message)
     }
   }

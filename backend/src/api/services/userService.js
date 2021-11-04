@@ -9,7 +9,6 @@ const userRegisters = async (body) => {
     return validate;
   }
   const findExistUser = await User.findOne({ email: body.email });
-  console.log(findExistUser, 'data')
   if (findExistUser) return { message: 'Email already exists' };
   const newUser = new User({
     name: body.name,

@@ -26,7 +26,6 @@ const loginValidate = async (body) => {
     email: Joi.string().required().min(3).max(50),
     password: Joi.string().required().min(5).max(200),
   });
-  console.log(body)
   const { error } = schema.validate(body);
   if (error && error.details.find(erro => erro)) {
     return { message: 'Invalid entries. Try again.' };
