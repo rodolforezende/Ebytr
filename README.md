@@ -44,10 +44,10 @@ Esse projeto está vincula ao uma conta do ATLAS do mongodb de meu acesso, para 
 Após fazer isso, entre no diretório "backend" e sigo os passos:
 
 ```
-*Instalando as dependencias
+* Instalando as dependencias
 $ npm i
 
-*Rodando nodemon para iniciar o servidor
+* Rodando nodemon para iniciar o servidor
 $ npm run dev
 
 ```
@@ -59,10 +59,10 @@ __OBS__
 Abrindo um novo terminal, no diretório principal do app.
 
 ```
-*Instalando as dependencias
+* Instalando as dependencias
 $ npm i
 
-*Rodando o app
+* Rodando o app
 $ npm start
 
 ```
