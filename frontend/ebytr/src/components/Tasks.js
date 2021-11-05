@@ -78,7 +78,7 @@ const Tasks = () => {
           <form>
             <input type="text" placeholder="Digite o título" onChange={ handleChange } name='taskTitle' value={ task.taskTitle } />
             <input type="text" placeholder="Digite a descrição" onChange={ handleChange } name='taskDescription' value={ task.taskDescription } />
-            <div>
+            <div className="radio">
               <label htmlFor="current">
                 <input id="current" type="radio" name="status" value="Em andamento" onChange={ ({ target }) => setStatus(target.value) } />EM ANDAMENTO
               </label>
